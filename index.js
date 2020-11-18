@@ -40,16 +40,22 @@ client.on('messageReactionAdd', async(reaction, user) => {
     if(reaction.partial) await reaction.fetch();
     if(user.bot) return;
     if(!reaction.message.guild) return;
-    if(reaction.message.id === '778596045876887624'){
+    if(reaction.message.id === '778601159589101578'){
         if(reaction.emoji.name === '🔔') {
             await reaction.message.guild.members.cache.get(user.id).roles.add('760153844075200622')
-            user.send('You have obtained a role!')
+            user.send('Pridala som ti rolu Oznámení!')
         }
     }
-    if(reaction.message.id === '778596045876887624'){
+    if(reaction.message.id === '778601159589101578'){
         if(reaction.emoji.name === '📆') {
             await reaction.message.guild.members.cache.get(user.id).roles.add('760154498089484288')
-            user.send('You have obtained a role!')
+            user.send('Pridala som ti rolu Events!')
+        }
+    }
+    if(reaction.message.id === '778601159589101578'){
+        if(reaction.emoji.name === '🎉') {
+            await reaction.message.guild.members.cache.get(user.id).roles.add('760165732406263888')
+            user.send('Pridala som ti rolu Giveaway!')
         }
     }
 })
@@ -58,16 +64,22 @@ client.on('messageReactionRemove', async(reaction, user) => {
     if(reaction.partial) await reaction.fetch();
     if(user.bot) return;
     if(!reaction.message.guild) return;
-    if(reaction.message.id === '778596045876887624'){
+    if(reaction.message.id === '778601159589101578'){
         if(reaction.emoji.name === '🔔') {
             await reaction.message.guild.members.cache.get(user.id).roles.remove('760153844075200622')
-            user.send('One of your roles has been removed!')
+            user.send('Obobrala som ti rolu Oznámení!')
         }
     }
-    if(reaction.message.id === '778596045876887624'){
+    if(reaction.message.id === '778601159589101578'){
         if(reaction.emoji.name === '📆') {
             await reaction.message.guild.members.cache.get(user.id).roles.remove('760154498089484288')
-            user.send('One of your roles has been removed!')
+            user.send('Obobrala som ti rolu Events!')
+        }
+    }
+    if(reaction.message.id === '778601159589101578'){
+        if(reaction.emoji.name === '🎉') {
+            await reaction.message.guild.members.cache.get(user.id).roles.remove('760165732406263888')
+            user.send('Obobrala som ti rolu Giveaway!')
         }
     }
 })
