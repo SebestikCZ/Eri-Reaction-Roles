@@ -41,8 +41,14 @@ client.on('messageReactionAdd', async(reaction, user) => {
     if(user.bot) return;
     if(!reaction.message.guild) return;
     if(reaction.message.id === '778596045876887624'){
-        if(reaction.emoji.name === ':bell:') {
+        if(reaction.emoji.name === '🔔') {
             await reaction.message.guild.members.cache.get(user.id).roles.add('760153844075200622')
+            user.send('You have obtained a role!')
+        }
+    }
+    if(reaction.message.id === '778596045876887624'){
+        if(reaction.emoji.name === '📆') {
+            await reaction.message.guild.members.cache.get(user.id).roles.add('760154498089484288')
             user.send('You have obtained a role!')
         }
     }
@@ -53,8 +59,14 @@ client.on('messageReactionRemove', async(reaction, user) => {
     if(user.bot) return;
     if(!reaction.message.guild) return;
     if(reaction.message.id === '778596045876887624'){
-        if(reaction.emoji.name === ':bell:') {
+        if(reaction.emoji.name === '🔔') {
             await reaction.message.guild.members.cache.get(user.id).roles.remove('760153844075200622')
+            user.send('One of your roles has been removed!')
+        }
+    }
+    if(reaction.message.id === '778596045876887624'){
+        if(reaction.emoji.name === '📆') {
+            await reaction.message.guild.members.cache.get(user.id).roles.remove('760154498089484288')
             user.send('One of your roles has been removed!')
         }
     }
