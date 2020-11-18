@@ -5,12 +5,13 @@ module.exports = {
     run : async(client, message) => {
         const embed = new MessageEmbed()
             .setTitle("Reakčné role")
-            .setDescription("Reaguj s 🔔 pre získanie role - <@&760153844075200622>\nReaguj s 📆 pre získanie role - <@&760154498089484288>")
-            .setColor("GREEN")
+            .setDescription("Reaguj pre získanie role \n 🔔 - <@&760153844075200622>\n📆 - <@&760154498089484288>\n🎉 - <@&760165732406263888>")
+            .setColor("0xa47dff")
     
         const msg = await message.channel.send(embed)
         await msg.react("🔔")
         await msg.react("📆")
+        await msg.react("🎉")
 
     }
 
