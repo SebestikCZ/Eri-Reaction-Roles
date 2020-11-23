@@ -13,14 +13,25 @@ client.categories = fs.readdirSync("./commands/");
 ["command"].forEach(handler => {
     require(`./handlers/${handler}`)(client);
 }); 
+
+const activities_list = [
+    "http://eventverse.fun", 
+    "by tomu#9436",
+    "Official EventVerse bot", 
+    "fowley je $imp"
+    ];
+
 client.on('ready', () => {
-    client.user.setPresence({
-        status: "online",
-        activity: {
-            name: "http://eventverse.fun",
-            type: "LISTENING"
-        }
-    })
+    setInterval(() => {
+        const index = Math.floor(Math.random() * (activities_list.length - 1) + 1); 
+        client.user.setPresence({
+            status : "online",
+            activity : {
+                name : activities_list[index],
+                type : "COMPETING",
+            }
+        }); 
+    }, 10000); 
     console.log(`${client.user.username} ✅`)
 })
 client.on('message', async message =>{
@@ -43,21 +54,19 @@ client.on('messageReactionAdd', async(reaction, user) => {
     if(reaction.message.id === '778601159589101578'){
         if(reaction.emoji.name === '🔔') {
             await reaction.message.guild.members.cache.get(user.id).roles.add('760153844075200622')
-            
-            user.send('✅ | Pridala som ti **rolu Oznámení!**')
-            
+            user.send('Pridala som ti rolu Oznámení!')
         }
     }
     if(reaction.message.id === '778601159589101578'){
         if(reaction.emoji.name === '📆') {
             await reaction.message.guild.members.cache.get(user.id).roles.add('760154498089484288')
-            user.send('✅ | Pridala som ti **rolu Events!**')
+            user.send('Pridala som ti rolu Events!')
         }
     }
     if(reaction.message.id === '778601159589101578'){
         if(reaction.emoji.name === '🎉') {
             await reaction.message.guild.members.cache.get(user.id).roles.add('760165732406263888')
-            user.send('✅ | Pridala som ti **rolu Giveaway!**')
+            user.send('Pridala som ti rolu Giveaway!')
         }
     }
 })
@@ -70,25 +79,25 @@ client.on('messageReactionAdd', async(reaction, user) => {
     if(reaction.message.id === '778723984937975858'){
         if(reaction.emoji.name === '1️⃣') {
             await reaction.message.guild.members.cache.get(user.id).roles.add('760149972833665065')
-            user.send('✅ | Pridala som ti farbu **číslo #1**')
+            user.send('Pridala som ti farbu číslo #1')
         }
     }
     if(reaction.message.id === '778723984937975858'){
         if(reaction.emoji.name === '2️⃣') {
             await reaction.message.guild.members.cache.get(user.id).roles.add('760149903266807828')
-            user.send('✅ | Pridala som ti farbu **číslo #2**')
+            user.send('Pridala som ti farbu číslo #2')
         }
     }
     if(reaction.message.id === '778723984937975858'){
         if(reaction.emoji.name === '3️⃣') {
             await reaction.message.guild.members.cache.get(user.id).roles.add('760149976591892530')
-            user.send('✅ | Pridala som ti farbu **číslo #3**')
+            user.send('Pridala som ti farbu číslo #3')
         }
     }
     if(reaction.message.id === '778723984937975858'){
         if(reaction.emoji.name === '4️⃣') {
             await reaction.message.guild.members.cache.get(user.id).roles.add('760149978810679328')
-            user.send('✅ | Pridala som ti farbu **číslo #4**')
+            user.send('Pridala som ti farbu číslo #4')
         }
     }
 })
@@ -101,47 +110,54 @@ client.on('messageReactionRemove', async(reaction, user) => {
     if(reaction.message.id === '778601159589101578'){
         if(reaction.emoji.name === '🔔') {
             await reaction.message.guild.members.cache.get(user.id).roles.remove('760153844075200622')
-            user.send('❎ | Obobrala som ti **rolu Oznámení!**')
+            user.send('Obobrala som ti rolu Oznámení!')
         }
     }
     if(reaction.message.id === '778601159589101578'){
         if(reaction.emoji.name === '📆') {
             await reaction.message.guild.members.cache.get(user.id).roles.remove('760154498089484288')
-            user.send('❎ | Obobrala som ti **rolu Events!**')
+            user.send('Obobrala som ti rolu Events!')
         }
     }
     if(reaction.message.id === '778601159589101578'){
         if(reaction.emoji.name === '🎉') {
             await reaction.message.guild.members.cache.get(user.id).roles.remove('760165732406263888')
-            user.send('❎ | Obobrala som ti **rolu Giveaway!**')
-        }
-    }
-    if(reaction.message.id === '778723984937975858'){
-        if(reaction.emoji.name === '1️⃣') {
-            await reaction.message.guild.members.cache.get(user.id).roles.remove('760149972833665065')
-            user.send('❎ | Odobrala som ti farbu **číslo #1**')
-        }
-    }
-    if(reaction.message.id === '778723984937975858'){
-        if(reaction.emoji.name === '2️⃣') {
-            await reaction.message.guild.members.cache.get(user.id).roles.remove('760149903266807828')
-            user.send('❎ | Odobrala som ti farbu **číslo #2**')
-        }
-    }
-    if(reaction.message.id === '778723984937975858'){
-        if(reaction.emoji.name === '3️⃣') {
-            await reaction.message.guild.members.cache.get(user.id).roles.remove('760149976591892530')
-            user.send('❎ | Odobrala som ti farbu **číslo #3**')
-        }
-    }
-    if(reaction.message.id === '778723984937975858'){
-        if(reaction.emoji.name === '4️⃣') {
-            await reaction.message.guild.members.cache.get(user.id).roles.remove('760149978810679328')
-            user.send('❎ | Odobrala som ti farbu **číslo #4**')
+            user.send('Obobrala som ti rolu Giveaway!')
         }
     }
 })
 
+client.on('messageReactionRemove', async(reaction, user) => {
+    if(reaction.message.partial) await reaction.message.fetch();
+    if(reaction.partial) await reaction.fetch();
+    if(user.bot) return;
+    if(!reaction.message.guild) return;   
+    if(reaction.message.id === '78601159589101578'){
+        if(reaction.emoji.name === '1️⃣') {
+            await reaction.message.guild.members.cache.get(user.id).roles.remove('760149972833665065')
+            user.send('Obobrala som ti farbu číslo #1')
+        }
+    }
+    if(reaction.message.id === '78601159589101578'){
+        if(reaction.emoji.name === '2️⃣') {
+            await reaction.message.guild.members.cache.get(user.id).roles.remove('760149903266807828')
+            user.send('Obobrala som ti farbu číslo #2')
+        }
+    }
+    if(reaction.message.id === '78601159589101578'){
+        if(reaction.emoji.name === '3️⃣') {
+            await reaction.message.guild.members.cache.get(user.id).roles.remove('760149976591892530')
+            user.send('Obobrala som ti farbu číslo #3')
+        }
+    }
+    if(reaction.message.id === '78601159589101578'){
+        if(reaction.emoji.name === '4️⃣') {
+            await reaction.message.guild.members.cache.get(user.id).roles.remove('760149978810679328')
+            user.send('Obobrala som ti farbu číslo #4')
+        }
+    }
 
+
+})
 
 client.login(token)
