@@ -19,7 +19,7 @@ module.exports = {
 function getAll(client, message) {
     const prefix = "!";
     const embed = new MessageEmbed()
-        .setColor("RANDOM")
+        .setColor(message.member.displayHexColor | "RANDOM")
 
     const commands = (category) => {
         return client.commands
