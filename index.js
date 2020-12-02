@@ -4,21 +4,22 @@ const client = new Client({
     disableEveryone: true,
     partials : ["MESSAGE", "CHANNEL", "REACTION"]
 });
-const config = require('./config.json')
-const prefix = config.prefix
+const config = require('./config.json');
+const prefix = "!";
 const token = config.token
 client.commands = new Collection();
 client.aliases = new Collection();
+
 client.categories = fs.readdirSync("./commands/");
 ["command"].forEach(handler => {
     require(`./handlers/${handler}`)(client);
 }); 
 
 const activities_list = [
-    "http://eventverse.fun", 
-    "by tomu#9436",
-    "Official EventVerse bot", 
-    "fowley je $imp"
+    { name: "http://eventverse.eu", type: "STREAMING", url: "https://twitch.tv/lukynkacze" },
+    { name: "tomu#9436", type: "WATCHING" },
+    { name: "Official EventVerse bot", type: "PLAYING" },
+    { name: "fowley je $imp", type: "PLAYING" } 
     ];
 
 client.on('ready', () => {
@@ -26,21 +27,20 @@ client.on('ready', () => {
         const index = Math.floor(Math.random() * (activities_list.length - 1) + 1); 
         client.user.setPresence({
             status : "online",
-            activity : {
-                name : activities_list[index],
-                type : "COMPETING",
-            }
+            activity: activities_list[index]
         }); 
     }, 10000); 
-    console.log(`${client.user.username} ✅`)
+    console.log(`${client.user.username} ✅`);
 })
 client.on('message', async message =>{
     if(message.author.bot) return;
     if(!message.content.startsWith(prefix)) return;
     if(!message.guild) return;
     if(!message.member) message.member = await message.guild.fetchMember(message);
+    
     const args = message.content.slice(prefix.length).trim().split(/ +/g);
     const cmd = args.shift().toLowerCase();
+    
     if(cmd.length == 0 ) return;
     let command = client.commands.get(cmd)
     if(!command) command = client.commands.get(client.aliases.get(cmd));
