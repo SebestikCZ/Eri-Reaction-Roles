@@ -1,5 +1,6 @@
 const Discord = require('discord.js');
 const db = require('quick.db');
+const { verifyOverdrawn } = require('../../functions.js');
 
 module.exports = {
     name : "pay",
@@ -48,6 +49,8 @@ module.exports = {
         }
         
 
+        const isNotInvalid = verifyOverdrawn(message, amount);
+        if (!isNotInvalid) return message.reply("Nemůžeš darovat víc shardů, než máš");
         var embed = new Discord.MessageEmbed()
             .setColor(roleColor)
             .setTitle("**<:EV_Shard:776100019907592192> | Shards Pay**")
