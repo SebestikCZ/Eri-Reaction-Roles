@@ -159,5 +159,19 @@ client.on('messageReactionRemove', async(reaction, user) => {
 
 
 })
+client.on("guildMemberAdd", async member => {
+  if (member.guild.id === "760137333273133126") {
+    const channel = await member.guild.channels.cache.get("786967773930061884");
+    const name = `⭐ | Members: ${member.guild.memberCount}`;
+    await channel.setName(name, "");
+  }
+})
+client.on("guildMemberRemove", async member => {
+  if (member.guild.id === "760137333273133126") {
+    const channel = await member.guild.channels.cache.get("786967773930061884");
+    const name = `⭐ | Members: ${member.guild.memberCount}`;
+    await channel.setName(name, "");
+  }
+})
 
 client.login(token)
