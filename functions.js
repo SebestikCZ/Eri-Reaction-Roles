@@ -1,5 +1,5 @@
 module.exports = {
-    async function verifyOverdrawn(message, amount) {
+    verifyOverdrawn: async function (message, amount) {
         const db = require('quick.db');
         let member = message.mentions.users.first() || message.guild.members.cache.get(args[0]).user;
         let author = message.author;
